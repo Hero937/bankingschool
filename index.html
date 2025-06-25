@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BankingSchool - NTUN</title>
-    <link rel="stylesheet" href="../Web/Web/ZeroOne/style.css">
+    <link rel="stylesheet" href="./style.css">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -145,6 +145,7 @@
             <div class="view-section" id="transactions-view">
                 <h3>ประวัติธุรกรรมทั้งหมด</h3>
                 <div class="transaction-list-container">
+                    <canvas id="transactionChart" style="height: 40vh; width: 100%; margin-bottom: 20px;"></canvas>
                     <ul id="full-transactions-list" class="transaction-list"></ul>
                     <p id="no-transactions-message" style="display: none; text-align: center; color: #aaa;">ยังไม่มีประวัติการทำธุรกรรม</p>
                 </div>
@@ -165,6 +166,8 @@
                 </div>
                 <div class="settings-group">
                     <h4>ความปลอดภัย</h4>
+                    <button class="action-button small" id="reset-password-button">รีเซ็ตรหัสผ่าน</button>
+                    <button class="action-button small" id="manage-devices-button">จัดการอุปกรณ์</button>
                     <button class="action-button small" onclick="window.location.href='mailto:ntun21933@ntun.ac.th?subject=ติดต่อธนาคารโรงเรียน&body=กรุณาพิมพ์ข้อความของคุณที่นี่'">ติดต่อเรา</button>
                     <p class="form-message" id="settings-action-message"></p>
                 </div>
@@ -219,7 +222,7 @@
 
         </div>
     </div>
-    <script src="../Web/ZeroOne/script.js"></script>
+    <script src="./script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
