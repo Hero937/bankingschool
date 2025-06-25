@@ -32,100 +32,80 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
 }
 
 .server-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
+    gap: 10px; /* Spacing between icons */
 }
 
 .server-icon {
     width: 48px;
     height: 48px;
-    background-color: #36393f;
+    background-color: #36393f; /* Icon background */
     border-radius: 50%; /* Circular icons */
     display: flex;
     justify-content: center;
     align-items: center;
     color: #dcddde;
-    font-size: 20px;
+    font-size: 1.5em;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    position: relative;
+    transition: border-radius 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    position: relative; /* For the active indicator */
 }
 
 .server-icon:hover {
-    border-radius: 30%; /* Squircle effect on hover */
-    background-color: #5865f2; /* Discord brand color */
-    color: #fff;
+    background-color: #5865f2; /* Hover color */
+    border-radius: 30%; /* Slightly less round on hover */
 }
 
 .server-icon.active {
-    border-radius: 30%;
-    background-color: #5865f2;
-    color: #fff;
+    background-color: #5865f2; /* Active color */
+    border-radius: 30%; /* Slightly less round when active */
 }
 
-/* Active indicator for sidebar icons */
 .server-icon.active::before {
     content: '';
     position: absolute;
-    left: -12px;
+    left: -8px; /* Position the indicator */
+    top: 50%;
+    transform: translateY(-50%);
     width: 8px;
-    height: 80%;
-    background-color: #dcddde;
+    height: 80%; /* Almost full height */
+    background-color: #fff; /* White indicator */
     border-radius: 4px;
 }
 
 .server-icon.bottom-icon {
-    margin-top: auto; /* Pushes icons to the bottom */
+    margin-top: auto; /* Push to the bottom */
 }
 
-
-/* Channel List (Second Column) */
+/* Channel List (Second column) */
 .channel-list {
     width: 240px;
-    background-color: #2f3136;
+    background-color: #2f3136; /* Slightly lighter than sidebar */
     display: flex;
     flex-direction: column;
-    padding: 0 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-right: 1px solid #282b30;
+    flex-shrink: 0; /* Prevent channel list from shrinking */
 }
 
 .channel-header {
-    padding: 15px 10px;
-    border-bottom: 1px solid #202225;
+    color: #fff;
+    padding: 10px 0;
+    border-bottom: 1px solid #282b30;
     margin-bottom: 10px;
 }
 
-.channel-header h3 {
-    color: #fff;
-    margin: 0;
-    font-size: 1.1em;
-}
-
 .channels {
-    flex-grow: 1; /* Takes available space */
-    overflow-y: auto; /* Scroll for many channels */
-    padding-right: 5px; /* Space for scrollbar */
-}
-
-/* Custom Scrollbar for Channels */
-.channels::-webkit-scrollbar {
-    width: 8px;
-}
-
-.channels::-webkit-scrollbar-track {
-    background: #2f3136;
-}
-
-.channels::-webkit-scrollbar-thumb {
-    background-color: #202225;
-    border-radius: 4px;
-    border: 2px solid #2f3136;
+    flex-grow: 1; /* Take up available space */
+    overflow-y: auto; /* Enable scrolling for many channels */
 }
 
 .channel {
@@ -133,14 +113,19 @@ body {
     align-items: center;
     padding: 8px 10px;
     margin-bottom: 5px;
-    color: #8e9297; /* Muted channel text */
+    border-radius: 5px;
+    color: #8e9297; /* Default channel text color */
     text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.channel i {
+    margin-right: 10px;
+    color: #72767d; /* Icon color */
 }
 
 .channel:hover {
-    background-color: #393c43;
+    background-color: #36393f;
     color: #dcddde;
 }
 
@@ -149,20 +134,18 @@ body {
     color: #fff;
 }
 
-.channel i {
-    margin-right: 8px;
-    font-size: 0.9em;
+.channel.active i {
+    color: #fff;
 }
 
-/* User Panel at the bottom of channel list */
 .user-panel {
-    background-color: #23272a;
-    padding: 10px;
     display: flex;
     align-items: center;
-    border-radius: 4px;
-    margin-top: auto; /* Pushes to the bottom */
-    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #292b2f; /* Darker background for user panel */
+    border-top: 1px solid #202225;
+    margin-top: 10px;
+    border-radius: 5px;
 }
 
 .user-avatar {
@@ -170,125 +153,73 @@ body {
     height: 32px;
     border-radius: 50%;
     margin-right: 10px;
-    background-color: #5865f2; /* Placeholder background */
-}
-
-.user-info {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    background-color: #5865f2; /* Default avatar background */
 }
 
 .user-info span {
     color: #fff;
     font-weight: 500;
-    font-size: 0.95em;
 }
 
 .user-info small {
-    color: #8e9297;
-    font-size: 0.75em;
-}
-
-.user-actions i {
     color: #b9bbbe;
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 3px;
-    transition: background-color 0.2s ease;
-}
-
-.user-actions i:hover {
-    background-color: #40444b;
+    display: block;
+    font-size: 0.8em;
 }
 
 /* Main Content Area */
 .main-content {
-    flex-grow: 1; /* Takes remaining space */
-    background-color: #36393f;
+    flex-grow: 1; /* Takes up the rest of the space */
+    background-color: #36393f; /* Main content background */
     display: flex;
     flex-direction: column;
     padding: 20px;
-    overflow-y: auto; /* Scroll for content */
-}
-
-/* Custom Scrollbar for Main Content */
-.main-content::-webkit-scrollbar {
-    width: 8px;
-}
-
-.main-content::-webkit-scrollbar-track {
-    background: #36393f;
-}
-
-.main-content::-webkit-scrollbar-thumb {
-    background-color: #2f3136;
-    border-radius: 4px;
-    border: 2px solid #36393f;
+    box-sizing: border-box;
+    overflow-y: auto; /* Enable scrolling for main content */
 }
 
 .main-header {
-    display: flex;
-    /* เปลี่ยนจาก justify-content: space-between; เพื่อให้ h2 ชิดซ้าย */
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #40444b;
-}
-
-.main-header h2 {
     color: #fff;
-    margin: 0;
-    font-size: 1.5em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #282b30;
 }
 
-/* View Sections */
 .view-section {
-    display: none; /* Hidden by default, JavaScript will show/hide */
-    animation: fadeIn 0.3s ease-out;
+    display: none; /* Hidden by default */
 }
 
 .view-section.active {
-    display: block;
+    display: block; /* Show active section */
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.view-section h3 {
+h3 {
     color: #fff;
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.3em;
+    margin-bottom: 15px;
 }
 
-/* Dashboard specific styles */
+/* Balance Card */
 .balance-card {
     background-color: #2f3136;
-    padding: 25px;
+    padding: 20px;
     border-radius: 8px;
+    margin-bottom: 20px;
     text-align: center;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .balance-card h4 {
-    color: #8e9297;
-    margin-top: 0;
+    color: #b9bbbe;
     margin-bottom: 10px;
-    font-size: 1em;
 }
 
 .balance-amount {
-    color: #43b581; /* Green for positive balance */
-    font-size: 2.8em;
+    font-size: 2.5em;
     font-weight: 700;
-    letter-spacing: 1px;
+    color: #43b581; /* Green for positive balance */
 }
 
+/* Quick Actions */
 .quick-actions {
     display: flex;
     justify-content: space-around;
@@ -297,35 +228,29 @@ body {
 }
 
 .action-button {
-    background-color: #5865f2; /* Discord brand color */
+    background-color: #5865f2; /* Discord primary blue */
     color: #fff;
     border: none;
-    border-radius: 5px;
     padding: 12px 20px;
-    font-size: 1em;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    font-size: 1em;
+    transition: background-color 0.2s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    flex: 1; /* Distribute space evenly */
+    flex-grow: 1;
 }
 
 .action-button:hover {
-    background-color: #4752c4;
-    transform: translateY(-2px);
-}
-
-.action-button:active {
-    transform: translateY(0);
+    background-color: #4e5d94; /* Darker blue on hover */
 }
 
 .action-button.small {
     padding: 8px 15px;
     font-size: 0.9em;
-    flex: unset; /* Remove flex sizing */
-    width: fit-content;
+    flex-grow: 0;
 }
 
 /* Forms */
@@ -333,223 +258,161 @@ body {
     background-color: #2f3136;
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
     display: block;
+    color: #b9bbbe;
     margin-bottom: 8px;
-    color: #dcddde;
     font-weight: 500;
 }
 
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group input[type="password"] {
-    width: calc(100% - 20px); /* Account for padding */
-    padding: 12px 10px;
-    background-color: #202225;
-    border: 1px solid #40444b;
-    border-radius: 4px;
-    color: #dcddde;
-    font-size: 1em;
-    outline: none;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-
-.form-group input[type="text"]:focus,
-.form-group input[type="number"]:focus,
-.form-group input[type="password"]:focus {
-    border-color: #5865f2;
-    background-color: #36393f;
-}
-
-/* Style for file input */
-.form-group input[type="file"] {
-    background-color: #202225;
-    border: 1px solid #40444b;
-    border-radius: 4px;
+.form-group input {
+    width: 100%; /* Make input fill its container */
     padding: 10px;
-    color: #dcddde;
-    font-size: 1em;
-    width: calc(100% - 20px); /* Adjust width to fit padding */
-    cursor: pointer;
-}
-
-/* Style for the button inside the file input */
-.form-group input[type="file"]::-webkit-file-upload-button {
-    background-color: #5865f2;
-    color: #fff;
-    border: none;
+    border: 1px solid #4f545c;
     border-radius: 4px;
-    padding: 8px 12px;
-    cursor: pointer;
-    margin-right: 10px;
-    transition: background-color 0.2s ease;
+    background-color: #40444b;
+    color: #dcddde;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-.form-group input[type="file"]::-webkit-file-upload-button:hover {
-    background-color: #4752c4;
+.form-group input::placeholder {
+    color: #8e9297;
 }
 
+.form-group input:focus {
+    outline: none;
+    border-color: #5865f2;
+    box-shadow: 0 0 0 1px #5865f2;
+}
 
 .submit-button {
-    background-color: #5865f2;
+    background-color: #43b581; /* Green submit button */
     color: #fff;
     border: none;
-    border-radius: 5px;
     padding: 12px 25px;
-    font-size: 1.1em;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.2s ease-in-out;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .submit-button:hover {
-    background-color: #4752c4;
-    transform: translateY(-2px);
-}
-
-.submit-button:active {
-    transform: translateY(0);
+    background-color: #3ca270; /* Darker green on hover */
 }
 
 .form-message {
     margin-top: 15px;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 5px;
     text-align: center;
     font-weight: 500;
     display: none; /* Hidden by default */
 }
 
 .form-message.success {
-    background-color: #43b581; /* Green */
-    color: #fff;
+    background-color: #43b58140; /* Light green background */
+    color: #43b581;
     display: block;
 }
 
 .form-message.error {
-    background-color: #f04747; /* Red */
-    color: #fff;
+    background-color: #f0474740; /* Light red background */
+    color: #f04747;
     display: block;
-}
-
-/* Ensure messages under settings actions have proper spacing */
-#settings-action-message {
-    margin-top: 15px;
 }
 
 /* Transaction List */
 .transaction-list-container {
     background-color: #2f3136;
+    padding: 20px;
     border-radius: 8px;
-    padding: 15px;
-    min-height: 150px; /* Ensure some height even when empty */
-    display: flex;
-    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .transaction-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    flex-grow: 1;
-    overflow-y: auto;
-}
-
-/* Custom Scrollbar for Transaction List */
-.transaction-list::-webkit-scrollbar {
-    width: 8px;
-}
-
-.transaction-list::-webkit-scrollbar-track {
-    background: #2f3136;
-}
-
-.transaction-list::-webkit-scrollbar-thumb {
-    background-color: #202225;
-    border-radius: 4px;
-    border: 2px solid #2f3136;
 }
 
 .transaction-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #40444b;
-    color: #dcddde;
-    font-size: 0.95em;
+    padding: 12px 0;
+    border-bottom: 1px solid #3a3d42;
 }
 
 .transaction-item:last-child {
     border-bottom: none;
 }
 
-.transaction-info { /* Added this container for type and date */
-    display: flex;
-    flex-direction: column;
+.transaction-info {
+    flex-grow: 1;
 }
 
-.transaction-type {
-    font-weight: 600;
+.transaction-info span {
+    display: block;
+    color: #dcddde;
+    font-weight: 500;
 }
 
-.transaction-date {
+.transaction-info small {
     color: #8e9297;
     font-size: 0.85em;
-    margin-top: 2px;
 }
 
-
-/* --- NEW: Transaction amount colors based on JS classes --- */
-.transaction-amount.credit {
-    color: #43b581; /* Green for money in (deposit, transfer_in) */
+.transaction-amount {
     font-weight: 600;
+    font-size: 1.1em;
+}
+
+.transaction-amount.credit {
+    color: #43b581; /* Green for deposits/credits */
 }
 
 .transaction-amount.debit {
-    color: #f04747; /* Red for money out (withdraw, transfer_out) */
-    font-weight: 600;
+    color: #f04747; /* Red for withdrawals/debits */
 }
-/* --- END NEW --- */
 
-
-/* Settings View */
+/* Settings */
 .settings-group {
     background-color: #2f3136;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .settings-group h4 {
-    color: #fff;
-    margin-top: 0;
+    color: #b9bbbe;
     margin-bottom: 15px;
-    border-bottom: 1px solid #40444b;
+    border-bottom: 1px solid #4f545c;
     padding-bottom: 10px;
-    font-size: 1.1em;
 }
 
 .settings-group p {
     color: #dcddde;
     margin-bottom: 10px;
-    font-size: 0.95em;
 }
 
 .settings-group p span {
-    font-weight: 600;
+    font-weight: 500;
     color: #fff;
 }
 
-/* Auth Overlay and Modals */
+/* Auth Overlay */
 .auth-overlay {
     position: fixed;
     top: 0;
@@ -561,123 +424,96 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    backdrop-filter: blur(5px);
-    display: none; /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .auth-overlay.active {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
 }
 
 .auth-modal {
-    background-color: #2f3136;
+    background-color: #36393f;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    width: 90%;
+    max-width: 400px;
     text-align: center;
-    position: relative;
-    animation: popIn 0.3s ease-out;
-}
-
-@keyframes popIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+    color: #dcddde;
+    box-sizing: border-box;
 }
 
 .auth-modal h2 {
+    margin-bottom: 20px;
     color: #fff;
-    margin-bottom: 25px;
-    font-size: 1.8em;
 }
 
 .auth-tabs {
     display: flex;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #40444b;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #4f545c;
 }
 
 .auth-tab {
-    flex: 1;
-    padding: 12px 0;
+    flex-grow: 1;
+    padding: 10px 0;
     background-color: transparent;
     border: none;
     color: #8e9297;
     font-size: 1.1em;
-    font-weight: 500;
     cursor: pointer;
-    transition: color 0.2s ease;
-    position: relative;
-    overflow: hidden; /* For underline effect */
-}
-
-.auth-tab:hover {
-    color: #dcddde;
+    transition: color 0.2s ease-in-out;
 }
 
 .auth-tab.active {
     color: #fff;
+    border-bottom: 2px solid #5865f2;
+    font-weight: 600;
 }
-
-.auth-tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px; /* Overlap with border */
-    left: 0;
-    width: 100%;
-    background-color: #5865f2;
-    animation: tabUnderline 0.3s forwards;
-    height: 3px; /* Ensure height is set */
-}
-
-
-@keyframes tabUnderline {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-}
-
 
 .auth-form-container {
     display: none;
-    animation: fadeIn 0.3s ease-out;
 }
 
 .auth-form-container.active {
     display: block;
 }
 
-/* Adjust form-group in auth modal for better spacing */
-.auth-modal .form-group {
-    text-align: left;
+#auth-overlay .bank-form {
+    background-color: transparent; /* Remove background for form inside modal */
+    padding: 0;
+    box-shadow: none;
 }
 
-/* NEW: Styles for password toggle */
+/* Password Toggle Specific Styles */
 .password-group {
-    position: relative;
-    margin-bottom: 20px; /* Keep spacing consistent */
+    position: relative; /* Needed to position the icon absolutely inside */
+    margin-bottom: 15px; /* Maintain consistent spacing */
 }
 
-.password-group input[type="password"],
-.password-group input[type="text"] {
-    padding-right: 40px; /* Make space for the icon */
+.password-group input[type="password"] {
+    padding-right: 40px; /* Add padding to make space for the icon */
 }
 
 .password-toggle {
     position: absolute;
-    right: 15px; /* Adjust as needed for padding */
-    top: 50%; /* Center vertically with respect to the input field */
-    transform: translateY(calc(120% + 5px)); /* Adjust to align with the input, considering label height */
+    right: 15px; /* Adjust as needed */
+    top: 50%;
+    transform: translateY(-50%); /* Vertically center the icon */
     cursor: pointer;
-    color: #8e9297; /* Muted color */
-    transition: color 0.2s ease;
+    color: #b9bbbe; /* Lighter grey for icons */
+    font-size: 1.1em;
 }
 
 .password-toggle:hover {
-    color: #dcddde; /* Lighter on hover */
+    color: #ffffff;
 }
 
 
-/* Responsive Adjustments */
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .app-container {
         flex-direction: column;
@@ -724,32 +560,49 @@ body {
     .channel-list {
         width: 100%;
         height: auto;
-        border-bottom: 1px solid #202225;
+        border-right: none;
+        border-bottom: 1px solid #282b30;
+    }
+
+    .channel-header {
+        text-align: center;
     }
 
     .channels {
         display: flex;
-        overflow-x: auto;
-        padding: 0 10px;
-        padding-bottom: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
     }
 
     .channel {
-        flex-shrink: 0;
-        margin-right: 10px;
+        flex-grow: 1;
+        text-align: center;
+        justify-content: center;
+        padding: 8px 5px;
+    }
+
+    .channel i {
+        margin-right: 5px;
     }
 
     .user-panel {
-        display: none; /* Hide on small screens to save space */
+        display: none; /* Hide user panel on small screens */
     }
 
     .main-content {
         padding: 15px;
     }
 
-    .main-header {
+    .quick-actions {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+    }
+
+    .action-button {
+        width: 100%;
+    }
+
+    .auth-modal {
+        margin: 20px;
     }
 }
