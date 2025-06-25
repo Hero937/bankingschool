@@ -35,13 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const manageDevicesButton = document.getElementById('manage-devices-button');
     const settingsActionMessage = document.getElementById('settings-action-message');
 
-    // NEW: Password toggle elements
-    const loginPasswordInput = document.getElementById('login-password');
-    const loginPasswordToggle = document.getElementById('login-password-toggle');
-    const registerPasswordInput = document.getElementById('register-password');
-    const registerPasswordToggle = document.getElementById('register-password-toggle');
-
-
     // --- Bank Operation Forms ---
     const transferForm = document.getElementById('transfer-form');
     const transferMessage = document.getElementById('transfer-message');
@@ -748,22 +741,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // NEW: Password toggle functionality
-    const setupPasswordToggle = (inputElement, toggleElement) => {
-        if (inputElement && toggleElement) {
-            toggleElement.addEventListener('click', () => {
-                const type = inputElement.getAttribute('type') === 'password' ? 'text' : 'password';
-                inputElement.setAttribute('type', type);
-                // Toggle the eye icon
-                toggleElement.classList.toggle('fa-eye');
-                toggleElement.classList.toggle('fa-eye-slash');
-            });
-        }
-    };
-
-    setupPasswordToggle(loginPasswordInput, loginPasswordToggle);
-    setupPasswordToggle(registerPasswordInput, registerPasswordToggle);
 
 
     // --- Initial Load ---
