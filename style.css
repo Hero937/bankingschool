@@ -651,6 +651,32 @@ body {
     text-align: left;
 }
 
+/* NEW: Styles for password toggle */
+.password-group {
+    position: relative;
+    margin-bottom: 20px; /* Keep spacing consistent */
+}
+
+.password-group input[type="password"],
+.password-group input[type="text"] {
+    padding-right: 40px; /* Make space for the icon */
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px; /* Adjust as needed for padding */
+    top: 50%; /* Center vertically with respect to the input field */
+    transform: translateY(calc(120% + 5px)); /* Adjust to align with the input, considering label height */
+    cursor: pointer;
+    color: #8e9297; /* Muted color */
+    transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+    color: #dcddde; /* Lighter on hover */
+}
+
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .app-container {
